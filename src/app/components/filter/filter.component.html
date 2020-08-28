@@ -1,0 +1,68 @@
+<!-- Example single danger button -->
+<!-- <div class="btn-group mb-5">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Author
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item">A</a>
+    <a class="dropdown-item">B</a>
+    <a class="dropdown-item">C</a>
+  </div>
+
+</div> -->
+<div class="container">
+<mat-form-field style="width:150px" appearance="fill">
+  <mat-label>Author</mat-label>
+  <mat-select [(value)]="curFilter.author">
+    <mat-option [value]="author" *ngFor="let author of authorList">
+      {{author}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+&nbsp;
+<mat-form-field style="width:150px" appearance="fill">
+  <mat-label>Rating</mat-label>
+  <mat-select [(value)]="curFilter.rating">
+    <mat-option [value]="rating" *ngFor="let rating of ratingList">
+      <!-- TODO: use pipe -->
+      {{rating}} stars & up
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+&nbsp;
+<!-- <mat-form-field style="width:150px" appearance="fill">
+  <mat-label>Language</mat-label>
+  <mat-select [(value)]="curFilter.language">
+    <mat-option [value]="language"  *ngFor="let language of languageList">
+      {{language}}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->
+&nbsp;
+<mat-form-field style="width:150px" appearance="fill">
+  <mat-label>Genre</mat-label>
+  <mat-select multiple [(value)]="curFilter.genre">
+    <mat-option [value]="genre" *ngFor="let genre of genreList">
+      {{genre}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+&nbsp;
+<mat-form-field style="width:150px" appearance="fill">
+  <mat-label>Favorite</mat-label>
+  <mat-select [(value)]="curFilter.liked">
+    <mat-option [value]="false">
+      All
+    </mat-option>
+    <mat-option [value]="true">
+      My Favorite
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+&nbsp;
+<button class="btn btn-dark" (click)="applyFilter()">Apply</button>
+&nbsp;
+<button class="btn btn-dark" (click)="resetFilter()">Reset</button>
+&nbsp;
+<p>{{curFilter.author}} {{curFilter.rating}} {{curFilter.genre}} {{curFilter.liked}}</p>
+</div>

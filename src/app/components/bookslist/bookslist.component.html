@@ -1,0 +1,29 @@
+<app-filter (applyFilterEvent)="onApplyFilter($event)"></app-filter>
+
+<div class="container">
+  <div *ngIf="!isFetchError" class="row">
+    <div class="col-md-3" *ngFor="let book of books">
+      <div class="card mb-3">
+        <img src="{{book.coverImageUrl}}" height="250" object-fit="cover" class="card-img-top" alt="">
+        <div class="card-body mb-10">
+          <p style="line-height: 0.5"><a href="" routerLink="/bookdetail/{{book.id}}"class="">{{book.title}}</a></p>
+          <p style="text-align:left; line-height: 0.5">
+            <small>Rating: <b>{{book.rating}}</b></small>
+            <span style="float:right;">
+              <small><b>{{book.numOfLikes}}</b> likes</small>
+            </span>
+          </p>
+          <p style="line-height: 0.5"><small>{{book.author}}</small></p>
+          <hr>
+          <!-- <button *ngIf="book.liked" class="btn btn-sm" (click)="clickToDislike(book)" ><i class="fa fa-heart o" style="color:red"></i> Dislike</button>
+          <button *ngIf="!book.liked" class="btn btn-sm" (click)="clickToLike(book)"><i class="fa fa-heart-o"></i> Like</button>           -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isFetchError">
+    <p>No boooks can be fetched because: {{ fetchErrorMsg }}</p>
+  </div>
+</div>
+

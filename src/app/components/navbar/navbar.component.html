@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand navbar-dark bg-primary mb-4">
+  <div class="container">
+    <a href="#" class="navbar-brand" routerLink='/'>FireRead</a>
+  <div>
+    <ul class="navbar-nav ml-auto">
+      <!-- <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a routerLink="/" href="" class="nav-link">Home</a>
+      </li> -->
+      <!-- <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a routerLink="/bookslist" href="" class="nav-link">Books</a>
+      </li> -->
+      <li class="nav-item" *ngIf="!isLoggedIn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a routerLink="/login" href="" class="nav-link">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a href="#" class="nav-link">{{userEmail}}</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a href="#" (click)="logout()" class="nav-link">Logout</a>
+      </li>
+      <!-- <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a routerLink="/posts" href="" class="nav-link">Posts</a>
+      </li> -->
+    </ul>
+  </div>
+  </div>
+</nav>

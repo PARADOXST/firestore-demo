@@ -13,13 +13,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
 
-import { UserService } from './services/user.service';
 import { PostService } from './services/post.service';
 import { FirestoreService } from './services/firestore.service';
 import { AuthService } from './services/auth.service';
 
-import {UserComponent } from './components/user/user.component';
-import { UsersComponent } from './components/users/users.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
@@ -29,15 +26,16 @@ import { BookslistComponent } from './components/bookslist/bookslist.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from "@angular/material/input";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './components/login/login.component';
 import { BookdetailComponent } from './components/bookdetail/bookdetail.component';
+import { NewbookComponent } from './components/newbook/newbook.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
-    UsersComponent,
     NavbarComponent,
     PostsComponent,
     PostFormComponent,
@@ -47,6 +45,7 @@ import { BookdetailComponent } from './components/bookdetail/bookdetail.componen
     BookslistComponent,
     LoginComponent,
     BookdetailComponent,
+    NewbookComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,10 +58,11 @@ import { BookdetailComponent } from './components/bookdetail/bookdetail.componen
     BrowserAnimationsModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
     FlashMessagesModule.forRoot(),
   ],
   providers: [
-    UserService,
     FirestoreService,
     AuthService,
   ],

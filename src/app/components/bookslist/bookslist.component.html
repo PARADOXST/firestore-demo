@@ -10,7 +10,7 @@
           <p style="text-align:left; line-height: 0.5">
             <small>Rating: <b>{{book.rating}}</b></small>
             <span style="float:right;">
-              <small><b>{{book.numOfLikes}}</b> likes</small>
+              <small><b>{{book.numOfLikes}}</b> likes {{book.liked ? "(liked by you)" : ""}}</small>
             </span>
           </p>
           <p style="line-height: 0.5"><small>{{book.author}}</small></p>

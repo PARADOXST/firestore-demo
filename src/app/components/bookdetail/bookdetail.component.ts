@@ -5,7 +5,6 @@ import { FirestoreService} from '../../services/firestore.service'
 import { AuthService } from '../../services/auth.service';
 import { Review } from '../../models/review';
 import { FlashMessagesService } from 'angular2-flash-messages';
-
 @Component({
   selector: 'app-bookdetail',
   templateUrl: './bookdetail.component.html',
@@ -16,6 +15,8 @@ export class BookdetailComponent implements OnInit {
   book: Book;
   reviews: Review[] = [];
   userId: string;
+  curReview: string;
+  reviewSubscriber : any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,31 +30,37 @@ export class BookdetailComponent implements OnInit {
       console.log("Trying auth");
       if(auth) {
         this.userId = auth.uid;
-        this.firestoreService.getBookFromId(id).get().then((doc) => {
+        console.log(auth.displayName);
+        this.firestoreService.getBookFromId(id).onSnapshot((doc) => {
         if (doc.exists) {
           var book: Book = doc.data();
           book.id = doc.id;
           book.liked = this.userId ? doc.data().likedBy.includes(this.userId) : false;
           this.book = book;
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-        }).then(() => {
+
+          this.flashMessagesService.show('Realtime update received for current book.', {
+            cssClass: 'alert-success', timeout: 3000
+          });
           // fetch reviews
-          if(this.book) {
-            this.firestoreService.getReviewsFromBook(this.book.id).get().then(querySnapshot => {
+          if(!this.reviewSubscriber) {
+            this.reviewSubscriber = this.firestoreService.getReviewsFromBook(this.book.id).onSnapshot(querySnapshot => {
+              this.reviews = [];
               querySnapshot.forEach(review => {
                   console.log(review.id, " => ", review.data());
                   var curReview = review.data();
                   curReview.id = review.id;
                   this.reviews.push(curReview);
               });
+              this.flashMessagesService.show('Realtime update received for book reviews.', {
+                cssClass: 'alert-success', timeout: 3000
+              });
               console.log(this.reviews);
             });
           }
-        }).catch(function(error) {
-          console.log("Error getting document:", error);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
         });
       } else {
         this.userId = null;
@@ -84,6 +91,30 @@ export class BookdetailComponent implements OnInit {
     });
     book.liked = false;
     book.numOfLikes -= 1;
+  }
+
+  addReview() {
+    console.log(`send review to firestore: ${this.curReview}`);
+    this.firestoreService.getUserFromId(this.userId).get().then((doc) => {
+      let review: Review = {id: null, userId: this.userId, content: this.curReview, userName: doc.data().userName};
+      this.firestoreService.addReviewToBookRef(review, this.book.id)
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        this.curReview = "";
+      })
+      .catch((error) => {
+          console.error("Error adding document: ", error);
+          this.curReview = "";
+      });
+      })
+  }
+
+  deleteReview(review: Review) {
+    this.firestoreService.deleteReview(review, this.book.id).then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
   }
 
 }

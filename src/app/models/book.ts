@@ -1,13 +1,13 @@
 export interface Book {
-  id: string,
+  id?: string,
   title: string,
   author: string,
   coverImageUrl: string,
   rating: number,
   genre: string[],
-  likeBy: string[],
+  likedBy?: string[],
   // if liked by current user
-  liked: boolean,
-  numOfLikes: number,
+  liked?: boolean,
+  numOfLikes?: number,
   intro: string;
 }

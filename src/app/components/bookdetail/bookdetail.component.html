@@ -1,26 +1,54 @@
 <div *ngIf="book">{{book.title}}</div>
 <hr>
-<div *ngIf="book" class="card mb-3" style="width: 18rem;">
-  <img src="{{book.coverImageUrl}}" height="250" object-fit="cover" class="card-img-top" alt="">
-  <div class="card-body mb-10">
-    <p style="line-height: 0.5"><a href="" routerLink="/bookdetail/{{book.id}}"class="">{{book.title}}</a></p>
-    <p style="text-align:left; line-height: 0.5">
-      <small>Rating: <b>{{book.rating}}</b></small>
-      <span style="float:right;">
-        <small><b>{{book.numOfLikes}}</b> likes</small>
-      </span>
-    </p>
-    <p style="line-height: 0.5"><small>{{book.author}}</small></p>
-    <hr>
-    <button *ngIf="book.liked" class="btn btn-sm" (click)="clickToDislike(book)" ><i class="fa fa-heart o" style="color:red"></i> Dislike</button>
-    <button *ngIf="!book.liked" class="btn btn-sm" (click)="clickToLike(book)"><i class="fa fa-heart-o"></i> Like</button>          
+
+<div class="row">
+  <div class="col-sm-4">
+    <div class="card mb-3" style="width: 15rem;">
+      <img src="{{book.coverImageUrl}}" height="180px" object-fit="cover" class="card-img-top" alt="">
+      <div class="card-body mb-10">
+        <p style="line-height: 0.5"><a href="" routerLink="/bookdetail/{{book.id}}"class="">{{book.title}}</a></p>
+        <p style="text-align:left; line-height: 0.5">
+          <small>Rating: <b>{{book.rating}}</b></small>
+          <span style="float:right;">
+            <small><b>{{book.numOfLikes}}</b> likes</small>
+          </span>
+        </p>
+        <p style="line-height: 0.5"><small>{{book.author}}</small></p>
+        <hr>
+        <button *ngIf="book.liked" class="btn btn-sm" (click)="clickToDislike(book)" ><i class="fa fa-heart o" style="color:red"></i> Dislike</button>
+        <button *ngIf="!book.liked" class="btn btn-sm" (click)="clickToLike(book)"><i class="fa fa-heart-o"></i> Like</button>          
+      </div>
+    </div>
   </div>
+  <div class="col-sm-8">
+    <p><b>Introduction</b></p>
+    {{book.intro}}
+  </div>
+  
+</div>
+
+  
+  
+
+
+
+<div *ngIf="book" class="card card-body mb-3">
+  Add Review
+  <form>
+    <div class="form-group">
+      <textarea rows="2" class="form-control" name="content" #content [(ngModel)] = "curReview"></textarea>
+    </div>
+    <button (click)="addReview()" class="btn btn-dark btn-block">Add Review</button>
+  </form>
 </div>
 
 <!-- reviews -->
-<div class="card mb-3" *ngFor="let review of reviews">
-  <div class="card-body">
-    <h3><a href="" class="">{{review.userName}}</a></h3>
-    <p>{{review.content}}</p>
+<!-- <div class="card card-body mb-3" *ngFor="let review of reviews"> -->
+  <div class="card card-body mb-3" *ngFor="let review of reviews">
+    <form>
+      <h4><a class="">{{review.userName}}</a></h4>
+      <p>{{review.content}}</p>
+      <button *ngIf="review.userId == userId" (click)="deleteReview(review)" class="btn btn-danger btn-sm">Delete</button>
+  </form>
   </div>
-</div>
+<!-- </div> -->

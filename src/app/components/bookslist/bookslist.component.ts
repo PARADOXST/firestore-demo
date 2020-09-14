@@ -32,6 +32,7 @@ export class BookslistComponent implements OnInit {
       if(auth) {
         this.userId = auth.uid;
         console.log(`login user in bookslist component: ${this.userId}`)
+        console.log(auth);
       } else {
         this.userId = null;
       }
@@ -56,9 +57,10 @@ export class BookslistComponent implements OnInit {
     query.onSnapshot((snapshot) => {
       this.books = [];
       this.isFetchError = false;
-      this.flashMessagesService.show('Realtime update received from firestore.', {
-        cssClass: 'alert-success', timeout: 2000
-      });
+      console.log('Realtime update received for books.');
+      // this.flashMessagesService.show('Realtime update received for books.', {
+      //   cssClass: 'alert-success', timeout: 10000
+      // });
       snapshot.forEach((doc) => {
         var book: Book = doc.data();
         book.id = doc.id;
@@ -71,9 +73,10 @@ export class BookslistComponent implements OnInit {
       this.fetchErrorMsg = err.message;
       console.log(err.message);
     });
-    this.flashMessagesService.show('Query sent to firestore', {
-      cssClass: 'alert-success', timeout: 2000
-    });
+    console.log('Query sent to firestore');
+    // this.flashMessagesService.show('Query sent to firestore', {
+    //   cssClass: 'alert-success', timeout: 10000
+    // });
   }
 
   private detachAllListeners() {

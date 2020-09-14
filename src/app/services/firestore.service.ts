@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { Filter } from '../models/filter';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { FirebaseApp } from '@angular/fire'
+import { Review } from '../models/review';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,10 @@ export class FirestoreService {
 
   getReviewsFromBook(bookId: string) {
     return this.fs.collection('books').doc(bookId).collection('reviews');
+  }
+
+  deleteReview(review: Review, bookId: string) {
+    return this.fs.collection("books").doc(bookId).collection("reviews").doc(review.id).delete();
   }
 
   // why book from booklist can not be bind?
@@ -131,6 +136,35 @@ export class FirestoreService {
     });
   }
 
+  addReviewToBookRef(review: Review, bookId: string) {
+    return this.fs.collection("books").doc(bookId).collection('reviews')
+    .add({
+      content: review.content,
+      userId: review.userId,
+      userName: review.userName,
+    });
+  }
+
+  getUserFromId(userId: string): any {
+    return this.fs.collection('users').doc(userId);
+  }
+
+  getUserFromEmail(userEmail: string): any {
+    return this.fs.collection('users').where("userEmail", "==", userEmail).get();
+  }
+
+  addNewBook(book: Book) {
+    // Add a new document with a generated id.
+    this.fs.collection("books").add(book)
+    .then(function(docRef) {
+      console.log("Document written with ID: ", docRef.id);
+    })
+    .catch(function(error) {
+      console.error("Error adding document: ", error);
+    });
+
+  }
+
   // A test that returns promise
   returnPromise() {
     return this.fs.collection("books").get();
@@ -145,7 +179,6 @@ export class FirestoreService {
     .where("genre.Fiction", "==", true)
     .where("genre.Classics", "==", true)
     .where("genre.Contemporary", "==", false)
-    //.where("genre.Politics", "==", true)
     .where("genre.Literature", "==", true)
     .where("likedBy", "array-contains", 'Ljmrn4SfTMhKgFN8jb2s')
     .get()

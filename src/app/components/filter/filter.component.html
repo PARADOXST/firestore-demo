@@ -64,5 +64,5 @@
 &nbsp;
 <button class="btn btn-dark" (click)="resetFilter()">Reset</button>
 &nbsp;
-<p>{{curFilter.author}} {{curFilter.rating}} {{curFilter.genre}} {{curFilter.liked}}</p>
+<p *ngIf="showFilter" >{{curFilter.author}} {{curFilter.rating}} {{curFilter.genre}} {{curFilter.liked}}</p>
 </div>

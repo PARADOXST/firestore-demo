@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: "friendlyeats-6c49b.appspot.com",
     messagingSenderId: "286166064259",
     appId: "1:286166064259:web:b1bfc47d0ef7762ea24fb6"
-  }
+  },
+  showFilter: false,
 };
 
 /*

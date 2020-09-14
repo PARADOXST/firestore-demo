@@ -18,6 +18,9 @@
       <li class="nav-item" *ngIf="isLoggedIn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a href="#" (click)="logout()" class="nav-link">Logout</a>
       </li>
+      <li class="nav-item" *ngIf="isLoggedIn && isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a routerLink="/newbook" href="#" class="nav-link">New Book</a>
+      </li>
       <!-- <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a routerLink="/posts" href="" class="nav-link">Posts</a>
       </li> -->

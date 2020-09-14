@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Filter } from '../../models/filter';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-filter',
@@ -11,6 +12,7 @@ export class FilterComponent implements OnInit {
   genreList: string[];
   ratingList: number[];
   curFilter: Filter;
+  showFilter: boolean;
 
   @Output() applyFilterEvent: EventEmitter<Filter> = new EventEmitter();
 
@@ -19,7 +21,7 @@ export class FilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authorList = ['George Orwell', 'Ernest Hemingway'];
+    this.authorList = ['George Orwell', 'Ernest Hemingway', 'Charles Dickens', 'John Green', 'Steven King'];
     this.genreList = ['Classics', 'Contemporary', 'Fiction'];
     this.ratingList = [4, 3, 2, 1];
     this.curFilter = {
@@ -28,6 +30,8 @@ export class FilterComponent implements OnInit {
       genre: [],
       liked: null,
     }
+    this.showFilter = environment.showFilter;
+    
   }
 
   applyFilter() {

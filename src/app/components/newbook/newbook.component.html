@@ -1,0 +1,74 @@
+<h2>Add Book</h2>
+<div class="card card-body mb-3">
+  <form>
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" name="title" #title [(ngModel)] = "curBook.title">
+    </div>
+    <div class="form-group">
+      <label>Author</label>
+      <input type="text" class="form-control" name="author" #author [(ngModel)] = "curBook.author">
+    </div>
+    <div class="form-group">
+      <label>Cover Image Url</label>
+      <input type="text" class="form-control" name="coverImageUrl" #coverImageUrl [(ngModel)] = "curBook.coverImageUrl">
+    </div>
+    <label>Genre</label>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="isFiction" [(ngModel)] = "isFiction">
+      <label class="form-check-label">
+        Fiction
+      </label>
+      <br>
+      <input class="form-check-input" type="checkbox" name="isContemporary" [(ngModel)] = "isContemporary">
+      <label class="form-check-label">
+        Contemporary
+      </label>
+      <br>
+      <input class="form-check-input" type="checkbox" name="isClassic" [(ngModel)] = "isClassic">
+      <label class="form-check-label">
+        Classics
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Rating</label>
+      <input type="number" class="form-control" name="rating" #rating [(ngModel)] = "curBook.rating">
+    </div>
+    <!-- <div class="form-group">
+      <label>Genre</label>
+      <input type="text" class="form-control" name="rating" #rating [(ngModel)] = "curBook.rating">
+    </div> -->
+    <div class="form-group">
+      <label>Intro</label>
+      <textarea type="textarea" class="form-control" name="intro" #rating [(ngModel)] = "curBook.intro">
+      </textarea>
+    </div>
+    <!-- <input type="hidden" class="form-control" name="id" #id [(ngModel)] = "curBook.id"> -->
+    <button (click)="addNewBook()" class="btn btn-warning btn-block">Submit</button>
+
+  </form>
+</div>
+
+<!-- <div class="example-container">
+  <mat-form-field style="width:300px" appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="width:300px" appearance="fill">
+    <mat-label>Author</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="option">Option</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+</div> -->
